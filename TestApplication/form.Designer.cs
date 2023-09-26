@@ -35,6 +35,8 @@
             labelText = new Label();
             textBoxParagraphs = new TextBox();
             buttonSaveFirst = new Button();
+            componentWithTable = new CustomVisualComponent.ComponentWithTable(components);
+            buttonSaveSecond = new Button();
             SuspendLayout();
             // 
             // textBoxHeader
@@ -80,11 +82,22 @@
             buttonSaveFirst.UseVisualStyleBackColor = true;
             buttonSaveFirst.Click += buttonSaveFirst_Click;
             // 
+            // buttonSaveSecond
+            // 
+            buttonSaveSecond.Location = new Point(152, 270);
+            buttonSaveSecond.Name = "buttonSaveSecond";
+            buttonSaveSecond.Size = new Size(115, 81);
+            buttonSaveSecond.TabIndex = 5;
+            buttonSaveSecond.Text = "Получить таблицу";
+            buttonSaveSecond.UseVisualStyleBackColor = true;
+            buttonSaveSecond.Click += buttonSaveSecond_Click;
+            // 
             // form
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 697);
+            Controls.Add(buttonSaveSecond);
             Controls.Add(buttonSaveFirst);
             Controls.Add(textBoxParagraphs);
             Controls.Add(labelText);
@@ -104,5 +117,7 @@
         private Label labelText;
         private TextBox textBoxParagraphs;
         private Button buttonSaveFirst;
+        private CustomVisualComponent.ComponentWithTable componentWithTable;
+        private Button buttonSaveSecond;
     }
 }

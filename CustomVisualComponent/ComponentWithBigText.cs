@@ -78,7 +78,6 @@ namespace CustomVisualComponent
             pdfRenderer.RenderDocument();
 
             // Сохранение PDF-файла
-            // Регистрация провайдера кодировки для кодировки 1252, без этого ошибОчка была
             pdfRenderer.PdfDocument.Save(data.FilePath);
         }
     }
