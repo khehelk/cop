@@ -28,115 +28,68 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(form));
-            customComboBox1 = new CustomVisualComponent.CustomComboBox();
-            customListBox1 = new CustomVisualComponent.CustomListBox();
-            label1 = new Label();
-            buttonCheckTextBox = new Button();
-            customTextBox1 = new CustomVisualComponent.CustomTextBox();
-            buttonFillComboBox = new Button();
-            buttonClearComboBox = new Button();
-            buttonGetObj = new Button();
-            labelObjFromStr = new Label();
+            components = new System.ComponentModel.Container();
+            componentWithBigText = new CustomVisualComponent.ComponentWithBigText(components);
+            textBoxHeader = new TextBox();
+            labelHeader = new Label();
+            labelText = new Label();
+            textBoxParagraphs = new TextBox();
+            buttonSaveFirst = new Button();
             SuspendLayout();
             // 
-            // customComboBox1
+            // textBoxHeader
             // 
-            customComboBox1.Items = (List<string>)resources.GetObject("customComboBox1.Items");
-            customComboBox1.Location = new Point(12, 12);
-            customComboBox1.Name = "customComboBox1";
-            customComboBox1.SelectedValue = "";
-            customComboBox1.Size = new Size(365, 50);
-            customComboBox1.TabIndex = 0;
+            textBoxHeader.Location = new Point(83, 12);
+            textBoxHeader.Name = "textBoxHeader";
+            textBoxHeader.Size = new Size(184, 23);
+            textBoxHeader.TabIndex = 0;
             // 
-            // customListBox1
+            // labelHeader
             // 
-            customListBox1.Location = new Point(12, 124);
-            customListBox1.Name = "customListBox1";
-            customListBox1.Size = new Size(471, 110);
-            customListBox1.TabIndex = 1;
+            labelHeader.AutoSize = true;
+            labelHeader.Location = new Point(12, 15);
+            labelHeader.Name = "labelHeader";
+            labelHeader.Size = new Size(65, 15);
+            labelHeader.TabIndex = 1;
+            labelHeader.Text = "Заголовок";
             // 
-            // label1
+            // labelText
             // 
-            label1.AutoSize = true;
-            label1.Location = new Point(522, 99);
-            label1.Name = "label1";
-            label1.Size = new Size(105, 15);
-            label1.TabIndex = 3;
-            label1.Text = "Проверка TextBox";
+            labelText.AutoSize = true;
+            labelText.Location = new Point(12, 47);
+            labelText.Name = "labelText";
+            labelText.Size = new Size(39, 15);
+            labelText.TabIndex = 2;
+            labelText.Text = "Текст:";
             // 
-            // buttonCheckTextBox
+            // textBoxParagraphs
             // 
-            buttonCheckTextBox.Location = new Point(441, 95);
-            buttonCheckTextBox.Name = "buttonCheckTextBox";
-            buttonCheckTextBox.Size = new Size(75, 23);
-            buttonCheckTextBox.TabIndex = 4;
-            buttonCheckTextBox.Text = "Проверить";
-            buttonCheckTextBox.UseVisualStyleBackColor = true;
-            buttonCheckTextBox.Click += buttonCheckTextBox_Click;
+            textBoxParagraphs.Location = new Point(83, 47);
+            textBoxParagraphs.Multiline = true;
+            textBoxParagraphs.Name = "textBoxParagraphs";
+            textBoxParagraphs.Size = new Size(184, 107);
+            textBoxParagraphs.TabIndex = 3;
             // 
-            // customTextBox1
+            // buttonSaveFirst
             // 
-            customTextBox1.InputValue = "";
-            customTextBox1.Location = new Point(12, 81);
-            customTextBox1.Name = "customTextBox1";
-            customTextBox1.Pattern = null;
-            customTextBox1.Size = new Size(423, 48);
-            customTextBox1.TabIndex = 5;
-            // 
-            // buttonFillComboBox
-            // 
-            buttonFillComboBox.Location = new Point(441, 26);
-            buttonFillComboBox.Name = "buttonFillComboBox";
-            buttonFillComboBox.Size = new Size(129, 23);
-            buttonFillComboBox.TabIndex = 6;
-            buttonFillComboBox.Text = "Заполнить список";
-            buttonFillComboBox.UseVisualStyleBackColor = true;
-            buttonFillComboBox.Click += buttonFillComboBox_Click;
-            // 
-            // buttonClearComboBox
-            // 
-            buttonClearComboBox.Location = new Point(576, 26);
-            buttonClearComboBox.Name = "buttonClearComboBox";
-            buttonClearComboBox.Size = new Size(75, 23);
-            buttonClearComboBox.TabIndex = 7;
-            buttonClearComboBox.Text = "Очистить";
-            buttonClearComboBox.UseVisualStyleBackColor = true;
-            buttonClearComboBox.Click += buttonClearComboBox_Click;
-            // 
-            // buttonGetObj
-            // 
-            buttonGetObj.Location = new Point(473, 154);
-            buttonGetObj.Name = "buttonGetObj";
-            buttonGetObj.Size = new Size(75, 23);
-            buttonGetObj.TabIndex = 8;
-            buttonGetObj.Text = "Получить объект";
-            buttonGetObj.UseVisualStyleBackColor = true;
-            buttonGetObj.Click += buttonGetObj_Click;
-            // 
-            // labelObjFromStr
-            // 
-            labelObjFromStr.AutoSize = true;
-            labelObjFromStr.Location = new Point(576, 162);
-            labelObjFromStr.Name = "labelObjFromStr";
-            labelObjFromStr.Size = new Size(17, 15);
-            labelObjFromStr.TabIndex = 9;
-            labelObjFromStr.Text = "--";
+            buttonSaveFirst.Location = new Point(284, 80);
+            buttonSaveFirst.Name = "buttonSaveFirst";
+            buttonSaveFirst.Size = new Size(100, 74);
+            buttonSaveFirst.TabIndex = 4;
+            buttonSaveFirst.Text = "Сохранить первый pdf";
+            buttonSaveFirst.UseVisualStyleBackColor = true;
+            buttonSaveFirst.Click += buttonSaveFirst_Click;
             // 
             // form
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
-            Controls.Add(labelObjFromStr);
-            Controls.Add(buttonGetObj);
-            Controls.Add(buttonClearComboBox);
-            Controls.Add(buttonFillComboBox);
-            Controls.Add(customTextBox1);
-            Controls.Add(buttonCheckTextBox);
-            Controls.Add(label1);
-            Controls.Add(customListBox1);
-            Controls.Add(customComboBox1);
+            ClientSize = new Size(800, 697);
+            Controls.Add(buttonSaveFirst);
+            Controls.Add(textBoxParagraphs);
+            Controls.Add(labelText);
+            Controls.Add(labelHeader);
+            Controls.Add(textBoxHeader);
             Name = "form";
             Text = "form";
             ResumeLayout(false);
@@ -145,14 +98,11 @@
 
         #endregion
 
-        private CustomVisualComponent.CustomComboBox customComboBox1;
-        private CustomVisualComponent.CustomListBox customListBox1;
-        private Label label1;
-        private Button buttonCheckTextBox;
-        private CustomVisualComponent.CustomTextBox customTextBox1;
-        private Button buttonFillComboBox;
-        private Button buttonClearComboBox;
-        private Button buttonGetObj;
-        private Label labelObjFromStr;
+        private CustomVisualComponent.ComponentWithBigText componentWithBigText;
+        private TextBox textBoxHeader;
+        private Label labelHeader;
+        private Label labelText;
+        private TextBox textBoxParagraphs;
+        private Button buttonSaveFirst;
     }
 }

@@ -1,48 +1,57 @@
-﻿namespace TestApplication
+﻿using CustomVisualComponent;
+using PdfSharp.Drawing;
+using PdfSharp.Drawing.Layout;
+using PdfSharp.Pdf;
+using MigraDoc.DocumentObjectModel;
+using MigraDoc.Rendering;
+using System.Text;
+
+namespace TestApplication
 {
     public partial class form : Form
     {
         public form()
-        {
+        {            
             InitializeComponent();
-
-            string pattern = @"^(?:\+7|8)[ ]?\d{3}[ ]?\d{3}[ ]?\d{2}[ ]?\d{2}$";
-            customTextBox1.Pattern = pattern;
-            customTextBox1.Example = "Пример: +7(8) 123 456 78 90";
-
-            customListBox1.SetLayoutInfo("Какой-то текст из свойств - {Name}", "{", "}");
-
-            var person1 = new Person { Name = "Вася" };
-            var person2 = new Person { Name = "Коля"};
-            var person3 = new Person { Name = "Петя" };
-
-            customListBox1.FillProperty(person1, 0, "Name");
-            customListBox1.FillProperty(person2, 1, "Name");
-            customListBox1.FillProperty(person3, 2, "Name");
         }
 
-        private void buttonCheckTextBox_Click(object sender, EventArgs e)
+        private void buttonSaveFirst_Click(object sender, EventArgs e)
         {
-            label1.Text = customTextBox1.InputValue;
+            // Получаем введенный заголовок и текст абзацев
+            string documentTitle = textBoxHeader.Text;
+            string[] paragraphs = textBoxParagraphs.Lines;
+
+            if (string.IsNullOrWhiteSpace(documentTitle) || paragraphs.Length == 0)
+            {
+                MessageBox.Show("Заголовок и абзацы не могут быть пустыми.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // Определите путь к сохранению PDF-файла
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "PDF Files|*.pdf";
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                string filePath = saveFileDialog.FileName;
+
+                // Создаем объект PdfDocumentData
+                PdfDocumentData pdfData = new PdfDocumentData
+                {
+                    FilePath = filePath,
+                    DocumentTitle = documentTitle,
+                    Paragraphs = new List<string>(paragraphs)
+                };
+
+                try
+                {
+                    componentWithBigText.GeneratePdfDocument(pdfData);
+                    MessageBox.Show("PDF-документ успешно сохранен.", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Ошибка при создании PDF-документа: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
-
-        private void buttonFillComboBox_Click(object sender, EventArgs e)
-        {
-            customComboBox1.AddToCustomComboBox.Add("Вася");
-            customComboBox1.AddToCustomComboBox.Add("Коля");
-            customComboBox1.AddToCustomComboBox.Add("Петя");
-        }
-
-        private void buttonClearComboBox_Click(object sender, EventArgs e)
-        {
-            customComboBox1.Clear();
-        }
-
-        private void buttonGetObj_Click(object sender, EventArgs e) => labelObjFromStr.Text = customListBox1.GetObjectFromStr<Person>().Name;
-    }
-
-    public class Person
-    {
-        public string Name { get; set; }
     }
 }

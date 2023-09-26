@@ -9,6 +9,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="PdfSharp.MigraDoc.Standard" Version="1.51.15" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\CustomVisualComponent\CustomVisualComponent.csproj" />
   </ItemGroup>
 
