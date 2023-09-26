@@ -17,19 +17,64 @@ namespace CustomVisualComponent
             InitializeComponent();
         }
 
-        public ComboBox ComboBox
+        public void Clear()
         {
-            get { return comboBox; }
+            comboBox.Items.Clear();
+        }
+
+        public ComboBox.ObjectCollection AddToCustomComboBox
+        {
+            get { return comboBox.Items; }
+        }
+
+        public string SelectedValue
+        {
+            get
+            {
+                if (comboBox.SelectedItem != null)
+                {
+                    return comboBox.SelectedItem.ToString();
+                }
+                return string.Empty;
+            }
+            set
+            {
+                if (comboBox.Items.Contains(value))
+                {
+                    comboBox.SelectedItem = value;
+                }
+            }
         }
 
         public List<string> Items
         {
-            get { return comboBox.Items.Cast<string>().ToList(); }
+            get
+            {
+                return comboBox.Items.Cast<string>().ToList();
+            }
             set
             {
                 comboBox.Items.Clear();
                 comboBox.Items.AddRange(value.ToArray());
             }
+        }
+
+        private EventHandler _explicitEvent;
+        public event EventHandler ExplicitEvent
+        {
+            add
+            {
+                _explicitEvent += value;
+            }
+            remove
+            {
+                _explicitEvent -= value;
+            }
+        }
+
+        private void ComboBox_SelectedValueChanged(object sender, EventArgs e)
+        {
+            _explicitEvent?.Invoke(sender, e);
         }
     }
 }

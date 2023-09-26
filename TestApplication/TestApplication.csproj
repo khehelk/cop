@@ -9,17 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="ControlsLibraryNet60" Version="1.0.0" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\CustomVisualComponent\CustomVisualComponent.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="ComponentsLibraryNet60">
-      <HintPath>..\..\..\..\lib\net6.0-windows7.0\ComponentsLibraryNet60.dll</HintPath>
-    </Reference>
   </ItemGroup>
 
   <ItemGroup>

@@ -13,44 +13,76 @@ namespace CustomVisualComponent
 {
     public partial class CustomTextBox : UserControl
     {
-        private string pattern = @"^(?:\+7|8)\s\d{3}\s\d{3}\s\d{2}\s\d{2}$"; // Шаблон для номера телефона
-
         public CustomTextBox()
         {
             InitializeComponent();
         }
 
+        private string pattern;
+        private string example;
 
-        [Category("Custom")]
-        public string Value
+        public string Pattern
         {
-            get { return textBox.Text; }
+            get { return pattern; }
             set
             {
+                pattern = value;
+                UpdateText();
+            }
+        }
+
+        public string Example
+        {
+            set
+            {
+                example = value;
+                toolTip.SetToolTip(this, example);
+            }
+        }
+
+        public string InputValue
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(pattern)) return string.Empty;
+                //throw new CustomPatternTextBoxException("Pattern is not set.");
+
+                if (!Regex.IsMatch(textBox.Text, pattern)) return string.Empty;
+                //throw new CustomPatternTextBoxException("Input value does not match the pattern.");
+
+                return textBox.Text;
+            }
+            set
+            {
+                if (string.IsNullOrEmpty(pattern)) return;
+                //throw new CustomPatternTextBoxException("Pattern is not set.");
+
+                if (!Regex.IsMatch(value, pattern)) return;
+                    //throw new CustomPatternTextBoxException("Input value does not match the pattern.");
+
                 textBox.Text = value;
-                ValidateInput(value);
+                OnValueChanged(EventArgs.Empty);
             }
         }
 
         public event EventHandler ValueChanged;
 
-        private void TextBox_TextChanged(object sender, EventArgs e)
+        protected virtual void OnValueChanged(EventArgs e)
         {
-            ValidateInput(textBox.Text);
-            ValueChanged?.Invoke(this, EventArgs.Empty);
+            ValueChanged?.Invoke(this, e);
         }
 
-        private void ValidateInput(string input)
+        private void UpdateText()
         {
-            if (!Regex.IsMatch(input, pattern))
+            if (string.IsNullOrEmpty(pattern) || !Regex.IsMatch(textBox.Text, pattern))
             {
-                toolTip.Show("Некорректный формат номера телефона: (+7/8 XXX XXX XX XX)", textBox, 0, -30, 2000);
-                textBox.BackColor = System.Drawing.Color.LightSalmon;
-            }
-            else
-            {
-                textBox.BackColor = System.Drawing.SystemColors.Window;
+                textBox.Text = "";
             }
         }
+    }
+
+    public class CustomPatternTextBoxException : Exception
+    {
+        public CustomPatternTextBoxException(string message) : base(message) { }
     }
 }

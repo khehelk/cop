@@ -39,6 +39,7 @@
             comboBox.Name = "comboBox";
             comboBox.Size = new Size(174, 23);
             comboBox.TabIndex = 0;
+            comboBox.SelectedIndexChanged += ComboBox_SelectedValueChanged;
             // 
             // label
             // 

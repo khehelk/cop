@@ -3,14 +3,14 @@
     partial class CustomTextBox
     {
         /// <summary> 
-        /// Обязательная переменная конструктора.
+        /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
         /// <summary> 
-        /// Освободить все используемые ресурсы.
+        /// Clean up any resources being used.
         /// </summary>
-        /// <param name="disposing">истинно, если управляемый ресурс должен быть удален; иначе ложно.</param>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -20,36 +20,35 @@
             base.Dispose(disposing);
         }
 
-        #region Код, автоматически созданный конструктором компонентов
+        #region Component Designer generated code
 
         /// <summary> 
-        /// Требуемый метод для поддержки конструктора — не изменяйте 
-        /// содержимое этого метода с помощью редактора кода.
+        /// Required method for Designer support - do not modify 
+        /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            textBox = new TextBox();
             label = new Label();
+            textBox = new TextBox();
             toolTip = new ToolTip(components);
             SuspendLayout();
-            // 
-            // textBox
-            // 
-            textBox.Location = new Point(219, 13);
-            textBox.Name = "textBox";
-            textBox.Size = new Size(168, 23);
-            textBox.TabIndex = 0;
-            textBox.TextChanged += TextBox_TextChanged;
             // 
             // label
             // 
             label.AutoSize = true;
-            label.Location = new Point(3, 2);
+            label.Location = new Point(3, 0);
             label.Name = "label";
             label.Size = new Size(196, 45);
-            label.TabIndex = 1;
+            label.TabIndex = 3;
             label.Text = "Поле для ввода номера телефона \r\n(номер телефона должен \r\nсоответствовать шаблону)";
+            // 
+            // textBox
+            // 
+            textBox.Location = new Point(219, 11);
+            textBox.Name = "textBox";
+            textBox.Size = new Size(168, 23);
+            textBox.TabIndex = 2;
             // 
             // CustomTextBox
             // 
@@ -58,15 +57,14 @@
             Controls.Add(label);
             Controls.Add(textBox);
             Name = "CustomTextBox";
-            Size = new Size(400, 50);
+            Size = new Size(423, 48);
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
-
-        private TextBox textBox;
         private Label label;
+        private TextBox textBox;
         private ToolTip toolTip;
     }
 }
