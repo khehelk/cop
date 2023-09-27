@@ -17,11 +17,13 @@ namespace CustomVisualComponent
             InitializeComponent();
         }
 
+        //Очистка
         public void Clear()
         {
             comboBox.Items.Clear();
         }
 
+        //Для заполнения
         public ComboBox.ObjectCollection AddToCustomComboBox
         {
             get { return comboBox.Items; }
@@ -33,7 +35,7 @@ namespace CustomVisualComponent
             {
                 if (comboBox.SelectedItem != null)
                 {
-                    return comboBox.SelectedItem.ToString();
+                    return comboBox.SelectedItem.ToString() ?? "";
                 }
                 return string.Empty;
             }
@@ -43,19 +45,6 @@ namespace CustomVisualComponent
                 {
                     comboBox.SelectedItem = value;
                 }
-            }
-        }
-
-        public List<string> Items
-        {
-            get
-            {
-                return comboBox.Items.Cast<string>().ToList();
-            }
-            set
-            {
-                comboBox.Items.Clear();
-                comboBox.Items.AddRange(value.ToArray());
             }
         }
 
