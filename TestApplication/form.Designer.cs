@@ -42,7 +42,6 @@
             // 
             // customComboBox1
             // 
-            customComboBox1.Items = (List<string>)resources.GetObject("customComboBox1.Items");
             customComboBox1.Location = new Point(12, 12);
             customComboBox1.Name = "customComboBox1";
             customComboBox1.SelectedValue = "";
