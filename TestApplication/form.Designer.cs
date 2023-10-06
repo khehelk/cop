@@ -28,15 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
-            componentWithBigText = new CustomVisualComponent.ComponentWithBigText(components);
             textBoxHeader = new TextBox();
             labelHeader = new Label();
             labelText = new Label();
             textBoxParagraphs = new TextBox();
             buttonSaveFirst = new Button();
-            componentWithTable = new CustomVisualComponent.ComponentWithTable(components);
             buttonSaveSecond = new Button();
+            componentWithBigText = new CustomVisualComponent.ComponentWithBigText();
             SuspendLayout();
             // 
             // textBoxHeader
@@ -110,14 +108,12 @@
         }
 
         #endregion
-
-        private CustomVisualComponent.ComponentWithBigText componentWithBigText;
         private TextBox textBoxHeader;
         private Label labelHeader;
         private Label labelText;
         private TextBox textBoxParagraphs;
         private Button buttonSaveFirst;
-        private CustomVisualComponent.ComponentWithTable componentWithTable;
         private Button buttonSaveSecond;
+        private CustomVisualComponent.ComponentWithBigText componentWithBigText;
     }
 }

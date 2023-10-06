@@ -1,9 +1,11 @@
-﻿using PdfSharp.Drawing;
-using PdfSharp.Drawing.Layout;
-using PdfSharp.Pdf;
-using MigraDoc.DocumentObjectModel;
-using MigraDoc.Rendering;
+﻿using System;
+using System.Collections.Generic;
+using iText.Kernel.Pdf;
+using iText.Layout;
+using iText.Layout.Element;
+using System.IO;
 using System.ComponentModel;
+using iText.Kernel.Font;
 using System.Text;
 
 namespace CustomVisualComponent
@@ -12,75 +14,48 @@ namespace CustomVisualComponent
     {
         public ComponentWithBigText()
         {
-            InitializeComponent();            
-        }
-
-        public ComponentWithBigText(IContainer container)
-        {
-            container.Add(this);
-
             InitializeComponent();
         }
 
-        private void DefineStyles(Document document)
+        public void GeneratePdfDocument(PdfDocumentData documentData)
         {
-            var style = document.Styles["Normal"];
-            style.Font.Name = "Times New Roman";
-            style.Font.Size = 14;
-
-            style = document.Styles.AddStyle("NormalTitle", "Normal");
-            style.Font.Bold = true;
-        }
-
-        public void GeneratePdfDocument(PdfDocumentData data)
-        {
-            // Проверка на заполненность входных данных
-            if (string.IsNullOrWhiteSpace(data.FilePath) ||
-                string.IsNullOrWhiteSpace(data.DocumentTitle) ||
-                data.Paragraphs == null || data.Paragraphs.Count == 0)
+            if (string.IsNullOrEmpty(documentData.FilePath) ||
+            string.IsNullOrEmpty(documentData.DocumentTitle) ||
+            documentData.Paragraphs == null || documentData.Paragraphs.Count == 0)
             {
-                throw new ArgumentException("Не все входные данные были предоставлены.");
+                throw new ArgumentException("Недостаточно данных для создания PDF-документа.");
             }
-
-            // Создание нового PDF-документа
-            PdfDocument pdfDocument = new PdfDocument();
-
-            // Добавление новой страницы
-            pdfDocument.AddPage();
-
-            // Создание MigraDoc-документа
-            Document document = new Document();
-            DefineStyles(document);
-            Section section = document.AddSection();
-            section.PageSetup.PageFormat = PageFormat.A4;
-
-            // Добавление заголовка
-            Style boldStyle = document.Styles.AddStyle("BoldStyle", "Normal");
-            boldStyle.Font.Bold = true;
-            Paragraph title = section.AddParagraph(data.DocumentTitle);
-            title.Format.Alignment = ParagraphAlignment.Center;
-            title.Style = "BoldStyle";
-
-            // Добавление абзацев
-            foreach (string paragraphText in data.Paragraphs)
+            using (PdfWriter writer = new PdfWriter(new FileInfo(documentData.FilePath)))
             {
-                Paragraph paragraph = section.AddParagraph(paragraphText);
-                paragraph.Format.SpaceAfter = "1cm";
+                using (PdfDocument pdf = new PdfDocument(writer))
+                {
+                    using (Document doc = new Document(pdf))
+                    {
+                        PdfFont font = PdfFontFactory.CreateFont("c:\\windows\\fonts\\times.ttf", "Identity-H");
+
+                        // Добавление заголовка
+                        Paragraph title = new Paragraph(documentData.DocumentTitle)
+                            .SetFont(font)
+                            .SetFontSize(18)
+                            .SetBold()
+                            .SetTextAlignment(iText.Layout.Properties.TextAlignment.CENTER);
+                        ;
+                        doc.Add(title);
+
+                        // Добавление текста из массива строк
+                        foreach (string text in documentData.Paragraphs)
+                        {
+                            Paragraph paragraph = new Paragraph(text)
+                                .SetFont(font)
+                                .SetFontSize(12);
+                            doc.Add(paragraph);
+                        }
+                        doc.Close();
+                    }
+                }
             }
-
-            // Рендеринг MigraDoc-документа в PDF
-            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
-
-            PdfDocumentRenderer pdfRenderer = new PdfDocumentRenderer(true)
-            {
-                Document = document
-            };
-            pdfRenderer.RenderDocument();
-
-            // Сохранение PDF-файла
-            pdfRenderer.PdfDocument.Save(data.FilePath);
         }
-    }
+    }            
 
     public class PdfDocumentData
     {
