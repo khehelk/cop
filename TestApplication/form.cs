@@ -63,18 +63,18 @@ namespace TestApplication
 
             List<HeaderInfo> headerInfos = new()
             {
-                new (){ColumnName="ID", ColumnWidth=50, RowSpan=2, ColumnSpan=1},
-                new (){ColumnName="University", ColumnWidth=100, RowSpan=2, ColumnSpan=1},
+                new (){ColumnName="ID", ColumnWidth=50},
+                new (){ColumnName="University", ColumnWidth=100},
                 new (){
                     ColumnName="PersonalData",
                     ColumnWidth=300,
-                    RowSpan=1,
-                    ColumnSpan=3,
+                    MergeStart=2,
+                    MergeEnd=4,
                     SubColumns = new()
                     {
-                        new (){ ColumnName="Name", ColumnWidth=100, RowSpan=1, ColumnSpan=1},
-                        new (){ ColumnName="Surname", ColumnWidth=100, RowSpan=1, ColumnSpan=1},
-                        new (){ ColumnName="City", ColumnWidth=100, RowSpan=1, ColumnSpan=1}
+                        new (){ ColumnName="Name", ColumnWidth=100, IsSubColumn = true},
+                        new (){ ColumnName="Surname", ColumnWidth=100,IsSubColumn = true},
+                        new (){ ColumnName="City", ColumnWidth=100, IsSubColumn = true}
                     }
                 },
             };
@@ -84,22 +84,22 @@ namespace TestApplication
                 new()
                 {
                     new Dictionary<string, string>
-                {
-                    { "ID", "1" },
-                    { "University", "УлГТУ" },
-                    { "Name", "Иван" },
-                    { "Surname", "Петров" },
-                    { "City", "Ульяновск" },
-                },
-                new Dictionary<string, string>
-                {
-                    { "ID", "2" },
-                    { "University", "УлГУ" },
-                    { "Name", "Иван" },
-                    { "Surname", "Петров" },
-                    { "City", "Ульяновск" },
-                },
-                // Добавьте другие записи
+                    {
+                        { "ID", "1" },
+                        { "University", "УлГТУ" },
+                        { "Name", "Иван" },
+                        { "Surname", "Петров" },
+                        { "City", "Ульяновск" },
+                    },
+                    new Dictionary<string, string>
+                    {
+                        { "ID", "2" },
+                        { "University", "УлГУ" },
+                        { "Name", "Иван" },
+                        { "Surname", "Петров" },
+                        { "City", "Ульяновск" },
+                    },
+                                // Добавьте другие записи
             };
 
             // Определите путь к сохранению PDF-файла

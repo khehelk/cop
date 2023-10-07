@@ -19,7 +19,7 @@ namespace CustomComponent
         private int fontSize;
 
         public ComponentWithTable()
-        {            
+        {
             InitializeComponent();
         }
 
@@ -27,11 +27,13 @@ namespace CustomComponent
             PdfTableData docInfo,
             List<HeaderInfo> headers,
             TableData data
-        ){
+        )
+        {
             font = PdfFontFactory.CreateFont("c:\\windows\\fonts\\times.ttf", "Identity-H");
             fontSize = 14;
 
-            if (docInfo == null || string.IsNullOrEmpty(docInfo.FileName) || string.IsNullOrEmpty(docInfo.DocumentTitle))
+            if (docInfo == null || string.IsNullOrEmpty(docInfo.FileName) || string.IsNullOrEmpty(docInfo.DocumentTitle) ||
+                headers == null || headers.Count == 0)
             {
                 throw new ArgumentException("Недостаточно данных для создания PDF-документа.");
             }
@@ -50,7 +52,7 @@ namespace CustomComponent
                 CreateTableData(table, data, headers);
 
                 // Добавление таблицы в документ
-                doc.Add(new Paragraph(docInfo.DocumentTitle).SetFont(font).SetTextAlignment(TextAlignment.CENTER));
+                doc.Add(new Paragraph(docInfo.DocumentTitle).SetFont(font).SetFontSize(fontSize).SetBold().SetTextAlignment(TextAlignment.CENTER));
                 doc.Add(table);
                 doc.Close();
             }
@@ -59,11 +61,11 @@ namespace CustomComponent
         public int GetColumnsNumber(List<HeaderInfo> headers)
         {
             int columnsNumber = 0;
-            foreach(var headerCell in headers)
+            foreach (var headerCell in headers)
             {
-                if(headerCell.SubColumns != null)
+                if (headerCell.SubColumns.Count > 0)
                 {
-                    foreach(var item in headerCell.SubColumns)
+                    foreach (var item in headerCell.SubColumns)
                     {
                         columnsNumber++;
                     }
@@ -81,7 +83,7 @@ namespace CustomComponent
             {
                 foreach (var column in headers)
                 {
-                    if (column.SubColumns != null && column.SubColumns.Count > 0)
+                    if (column.SubColumns.Count > 0)
                     {
                         TableData td = new();
                         td.Data = new();
@@ -101,22 +103,22 @@ namespace CustomComponent
         {
             foreach (var column in headerInfo)
             {
-                Cell headerCell = new Cell(column.RowSpan ?? 0, column.ColumnSpan ?? 0)
-                   .SetWidth((float)column.ColumnWidth)
+                Cell headerCell = new Cell((column.IsSubColumn == false && column.SubColumns.Count == 0) ? 2 : 1, column.MergeEnd - column.MergeStart + 1 ?? 1)
+                   .SetWidth(column.ColumnWidth)
                    .SetTextAlignment(TextAlignment.CENTER)
                    .Add(new Paragraph(column.ColumnName).SetFont(font).SetFontSize(fontSize).SetBold());
-                table.AddHeaderCell(headerCell);
-                if (column.SubColumns != null && column.SubColumns.Count > 0)
+
+                table.AddHeaderCell(headerCell);                
+                if (column.SubColumns.Count > 0)
                 {
                     CreateTableHeader(table, column.SubColumns);
-                }                            
+                }
             }
         }
 
         public ComponentWithTable(IContainer container)
         {
             container.Add(this);
-
             InitializeComponent();
         }
     }
@@ -129,11 +131,12 @@ namespace CustomComponent
 
     public class HeaderInfo
     {
-        public string? ColumnName { get; set; }
-        public int? ColumnWidth { get; set; }
-        public int? RowSpan { get; set; }
-        public int? ColumnSpan { get; set; }
-        public List<HeaderInfo>? SubColumns { get; set; } = null;
+        public string? ColumnName { get; set; } = string.Empty;
+        public int ColumnWidth { get; set; } = 100;
+        public int? MergeStart { get; set; } // Начальная строка объединения
+        public int? MergeEnd { get; set; }
+        public bool IsSubColumn { get; set; } = false;
+        public List<HeaderInfo> SubColumns { get; set; } = new List<HeaderInfo>();
     }
 
     public class TableData
