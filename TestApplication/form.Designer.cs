@@ -37,6 +37,8 @@
             buttonSaveSecond = new Button();
             componentWithBigText = new CustomComponent.ComponentWithBigText();
             componentWithTable = new CustomComponent.ComponentWithTable(components);
+            buttonDiagram = new Button();
+            componentWithLinearDiagram = new CustomComponent.ComponentWithLinearDiagram(components);
             SuspendLayout();
             // 
             // textBoxHeader
@@ -84,19 +86,30 @@
             // 
             // buttonSaveSecond
             // 
-            buttonSaveSecond.Location = new Point(152, 270);
+            buttonSaveSecond.Location = new Point(390, 80);
             buttonSaveSecond.Name = "buttonSaveSecond";
-            buttonSaveSecond.Size = new Size(115, 81);
+            buttonSaveSecond.Size = new Size(100, 74);
             buttonSaveSecond.TabIndex = 5;
             buttonSaveSecond.Text = "Получить таблицу";
             buttonSaveSecond.UseVisualStyleBackColor = true;
             buttonSaveSecond.Click += buttonSaveSecond_Click;
+            // 
+            // buttonDiagram
+            // 
+            buttonDiagram.Location = new Point(496, 80);
+            buttonDiagram.Name = "buttonDiagram";
+            buttonDiagram.Size = new Size(100, 74);
+            buttonDiagram.TabIndex = 6;
+            buttonDiagram.Text = "Получить диаграмму";
+            buttonDiagram.UseVisualStyleBackColor = true;
+            buttonDiagram.Click += buttonDiagram_Click;
             // 
             // form
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 697);
+            Controls.Add(buttonDiagram);
             Controls.Add(buttonSaveSecond);
             Controls.Add(buttonSaveFirst);
             Controls.Add(textBoxParagraphs);
@@ -118,5 +131,7 @@
         private Button buttonSaveSecond;
         private CustomComponent.ComponentWithBigText componentWithBigText;
         private CustomComponent.ComponentWithTable componentWithTable;
+        private Button buttonDiagram;
+        private CustomComponent.ComponentWithLinearDiagram componentWithLinearDiagram;
     }
 }

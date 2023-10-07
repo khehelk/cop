@@ -7,6 +7,7 @@ using System.Text;
 using System.Windows.Forms;
 using MigraDoc.DocumentObjectModel.Tables;
 using System.Runtime.CompilerServices;
+using MigraDoc.DocumentObjectModel;
 
 namespace TestApplication
 {
@@ -58,14 +59,14 @@ namespace TestApplication
 
         private void buttonSaveSecond_Click(object sender, EventArgs e)
         {
-            DocumentInfo documentInfo = new DocumentInfo();
-            
+            PdfTableData documentInfo = new PdfTableData();
+
             List<HeaderInfo> headerInfos = new()
             {
                 new (){ColumnName="ID", ColumnWidth=50, RowSpan=2, ColumnSpan=1},
                 new (){ColumnName="University", ColumnWidth=100, RowSpan=2, ColumnSpan=1},
                 new (){
-                    ColumnName="PersonalData", 
+                    ColumnName="PersonalData",
                     ColumnWidth=300,
                     RowSpan=1,
                     ColumnSpan=3,
@@ -114,6 +115,55 @@ namespace TestApplication
                 try
                 {
                     componentWithTable.GeneratePdf(documentInfo, headerInfos, data);
+                    MessageBox.Show("PDF-документ успешно сохранен.", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Ошибка при создании PDF-документа: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void buttonDiagram_Click(object sender, EventArgs e)
+        {
+            PdfDiagramFileInfo documentInfo = new PdfDiagramFileInfo();
+            DiagramData diagramData = new DiagramData();
+            diagramData.DiagramName = textBoxHeader.Text;
+            diagramData.LegendPosition = DiagramLegendPosition.BottomCenterOutside;
+            diagramData.Series = new Dictionary<string, List<(double, double)>>()
+            {
+                {"Ряд 1", new List<(double, double)>()
+                    {
+                        (1, 1),
+                        (5, 10),
+                        (10, 7),
+                        (15, 12),
+                        (20, 35),
+                    } 
+                },
+                {"Ряд 2", new List<(double, double)>()
+                    {
+                        (1, 7),
+                        (5, 12),
+                        (10, 35),
+                        (15, 1),
+                        (20, 10),                            
+                    }
+                }                
+            };
+
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "PDF Files|*.pdf";
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                string filePath = saveFileDialog.FileName;
+
+                documentInfo.DocumentTitle = textBoxHeader.Text;
+                documentInfo.FileName = filePath;
+
+                try
+                {
+                    componentWithLinearDiagram.GeneratePdfDocumentWithChart(documentInfo, diagramData);
                     MessageBox.Show("PDF-документ успешно сохранен.", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 catch (Exception ex)

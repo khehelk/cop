@@ -24,7 +24,7 @@ namespace CustomComponent
         }
 
         public void GeneratePdf(
-            DocumentInfo docInfo,
+            PdfTableData docInfo,
             List<HeaderInfo> headers,
             TableData data
         ){
@@ -121,7 +121,7 @@ namespace CustomComponent
         }
     }
 
-    public class DocumentInfo
+    public class PdfTableData
     {
         public string? FileName { get; set; }
         public string? DocumentTitle { get; set; }
