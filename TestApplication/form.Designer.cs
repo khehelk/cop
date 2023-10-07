@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             textBoxHeader = new TextBox();
             labelHeader = new Label();
             labelText = new Label();
@@ -35,6 +36,7 @@
             buttonSaveFirst = new Button();
             buttonSaveSecond = new Button();
             componentWithBigText = new CustomVisualComponent.ComponentWithBigText();
+            componentWithTable = new CustomVisualComponent.ComponentWithTable(components);
             SuspendLayout();
             // 
             // textBoxHeader
@@ -115,5 +117,6 @@
         private Button buttonSaveFirst;
         private Button buttonSaveSecond;
         private CustomVisualComponent.ComponentWithBigText componentWithBigText;
+        private CustomVisualComponent.ComponentWithTable componentWithTable;
     }
 }
