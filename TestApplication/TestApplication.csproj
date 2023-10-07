@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CustomVisualComponent\CustomComponent.csproj" />
+    <ProjectReference Include="..\CustomComponent\CustomComponent.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -8,7 +8,7 @@ using System.ComponentModel;
 using iText.Kernel.Font;
 using System.Text;
 
-namespace CustomVisualComponent
+namespace CustomComponent
 {
     public partial class ComponentWithBigText : Component
     {

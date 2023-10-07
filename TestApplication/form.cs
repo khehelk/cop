@@ -1,4 +1,4 @@
-﻿using CustomVisualComponent;
+﻿using CustomComponent;
 using PdfSharp.Drawing;
 using PdfSharp.Drawing.Layout;
 using PdfSharp.Pdf;

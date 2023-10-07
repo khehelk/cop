@@ -1,4 +1,4 @@
-﻿namespace CustomVisualComponent
+﻿namespace CustomComponent
 {
     partial class CustomTextBox
     {

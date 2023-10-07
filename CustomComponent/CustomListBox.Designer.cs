@@ -1,6 +1,6 @@
-﻿namespace CustomVisualComponent
+﻿namespace CustomComponent
 {
-    partial class CustomComboBox
+    partial class CustomListBox
     {
         /// <summary> 
         /// Обязательная переменная конструктора.
@@ -28,43 +28,44 @@
         /// </summary>
         private void InitializeComponent()
         {
-            comboBox = new ComboBox();
+            listBox = new ListBox();
             label = new Label();
             SuspendLayout();
             // 
-            // comboBox
+            // listBox
             // 
-            comboBox.FormattingEnabled = true;
-            comboBox.Location = new Point(179, 13);
-            comboBox.Name = "comboBox";
-            comboBox.Size = new Size(174, 23);
-            comboBox.TabIndex = 0;
-            comboBox.SelectedIndexChanged += ComboBox_SelectedValueChanged;
+            listBox.FormattingEnabled = true;
+            listBox.ItemHeight = 15;
+            listBox.Location = new Point(215, 15);
+            listBox.Name = "listBox";
+            listBox.Size = new Size(240, 79);
+            listBox.TabIndex = 0;
             // 
             // label
             // 
             label.AutoSize = true;
-            label.Location = new Point(3, 2);
+            label.Location = new Point(3, 24);
             label.Name = "label";
-            label.Size = new Size(156, 45);
-            label.TabIndex = 1;
-            label.Text = "Выпадающий список. \r\nСписок заполняется через \r\nпубличное свойство";
+            label.Size = new Size(207, 60);
+            label.TabIndex = 2;
+            label.Text = "Список значений. \r\nСписок заполняется через метод, \r\nпередающий объект, номер строки \r\nи имя свойства/поля";
             // 
-            // CustomComboBox
+            // CustomListBox
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(label);
-            Controls.Add(comboBox);
-            Name = "CustomComboBox";
-            Size = new Size(365, 50);
+            Controls.Add(listBox);
+            Name = "CustomListBox";
+            Size = new Size(471, 110);
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
 
-        private ComboBox comboBox;
+        private ListBox listBox;
+        private Label label1;
         private Label label;
     }
 }

@@ -35,8 +35,8 @@
             textBoxParagraphs = new TextBox();
             buttonSaveFirst = new Button();
             buttonSaveSecond = new Button();
-            componentWithBigText = new CustomVisualComponent.ComponentWithBigText();
-            componentWithTable = new CustomVisualComponent.ComponentWithTable(components);
+            componentWithBigText = new CustomComponent.ComponentWithBigText();
+            componentWithTable = new CustomComponent.ComponentWithTable(components);
             SuspendLayout();
             // 
             // textBoxHeader
@@ -116,7 +116,7 @@
         private TextBox textBoxParagraphs;
         private Button buttonSaveFirst;
         private Button buttonSaveSecond;
-        private CustomVisualComponent.ComponentWithBigText componentWithBigText;
-        private CustomVisualComponent.ComponentWithTable componentWithTable;
+        private CustomComponent.ComponentWithBigText componentWithBigText;
+        private CustomComponent.ComponentWithTable componentWithTable;
     }
 }

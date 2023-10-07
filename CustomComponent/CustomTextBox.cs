@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
 
-namespace CustomVisualComponent
+namespace CustomComponent
 {
     public partial class CustomTextBox : UserControl
     {

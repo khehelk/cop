@@ -1,6 +1,6 @@
-﻿namespace CustomVisualComponent
+﻿namespace CustomComponent
 {
-    partial class ComponentWithTable
+    partial class ComponentWithBigText
     {
         /// <summary>
         /// Required designer variable.
