@@ -1,4 +1,4 @@
-﻿namespace CustomComponent
+﻿namespace CustomComponentLibrary
 {
     partial class CustomComboBox
     {
@@ -29,42 +29,30 @@
         private void InitializeComponent()
         {
             comboBox = new ComboBox();
-            label = new Label();
             SuspendLayout();
             // 
             // comboBox
             // 
+            comboBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             comboBox.FormattingEnabled = true;
-            comboBox.Location = new Point(179, 13);
+            comboBox.Location = new Point(15, 13);
             comboBox.Name = "comboBox";
             comboBox.Size = new Size(174, 23);
             comboBox.TabIndex = 0;
             comboBox.SelectedIndexChanged += ComboBox_SelectedValueChanged;
             // 
-            // label
-            // 
-            label.AutoSize = true;
-            label.Location = new Point(3, 2);
-            label.Name = "label";
-            label.Size = new Size(156, 45);
-            label.TabIndex = 1;
-            label.Text = "Выпадающий список. \r\nСписок заполняется через \r\nпубличное свойство";
-            // 
             // CustomComboBox
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            Controls.Add(label);
             Controls.Add(comboBox);
             Name = "CustomComboBox";
-            Size = new Size(365, 50);
+            Size = new Size(201, 50);
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
 
         private ComboBox comboBox;
-        private Label label;
     }
 }

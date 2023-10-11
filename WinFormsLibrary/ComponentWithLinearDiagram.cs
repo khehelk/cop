@@ -4,6 +4,7 @@ using iText.Kernel.Pdf;
 using iText.Layout;
 using iText.Layout.Element;
 using iText.Layout.Properties;
+using Org.BouncyCastle.Math.EC.Multiplier;
 using OxyPlot;
 using OxyPlot.Axes;
 using OxyPlot.Legends;
@@ -12,8 +13,9 @@ using OxyPlot.WindowsForms;
 using System.ComponentModel;
 using System.Net.Http.Headers;
 using System.Reflection;
+using WinFormsLibrary.Helpers.PdfWithDiagram;
 
-namespace CustomComponent
+namespace WinFormsLibrary
 {
     public partial class ComponentWithLinearDiagram : Component
     {
@@ -30,91 +32,66 @@ namespace CustomComponent
         }        
 
         public void GeneratePdfDocumentWithChart(
-            PdfDiagramFileInfo pdfInfo,
-            DiagramData diagInfo
+            PdfWithDiagramData pdfDiagram
         ){
             PdfFont font = PdfFontFactory.CreateFont("c:\\windows\\fonts\\times.ttf", "Identity-H");
 
-            if (pdfInfo == null || 
-                pdfInfo.FileName == null || 
-                pdfInfo.DocumentTitle == null ||
-                diagInfo == null || 
-                diagInfo.DiagramName == null ||
-                diagInfo.Series == null ||
-                diagInfo.LegendPosition == null)
+            if (string.IsNullOrEmpty(pdfDiagram.FilePath) 
+                || string.IsNullOrEmpty(pdfDiagram.DocumentTitle) 
+                || string.IsNullOrEmpty(pdfDiagram.DiagramName) 
+                || pdfDiagram.Series == null)
             {
                 return;
             }
 
-            // Create a new OxyPlot chart
-            var plotModel = new PlotModel { Title = diagInfo.DiagramName };
+            var plotModel = new PlotModel { Title = pdfDiagram.DiagramName };
 
-            // Add X and Y axes
             var xAxis = new LinearAxis { Position = AxisPosition.Bottom };
             var yAxis = new LinearAxis { Position = AxisPosition.Left };
             plotModel.Axes.Add(xAxis);
             plotModel.Axes.Add(yAxis);
 
-            // Create a series for the data
-            foreach(var item in diagInfo.Series)
+            foreach(var item in pdfDiagram.Series)
             {
-                var singleSeries = new LineSeries { Title = item.Key };
-                foreach(var coordinates in item.Value)
+                var singleSeries = new LineSeries { Title = item.Name };
+                foreach(var coordinates in item.Data)
                 {
                     singleSeries.Points.Add(new DataPoint(coordinates.Item1, coordinates.Item2));
                 }
                 plotModel.Series.Add(singleSeries);
             }
 
-            var fieldInfo = typeof(DiagramLegendPosition).GetField(diagInfo.LegendPosition.ToString());
-            var attribute = fieldInfo.GetCustomAttribute<LegendSettingsAttribute>();
+            var fieldInfo = typeof(DiagramLegendPosition).GetField(pdfDiagram.LegendPosition.ToString());
+            var attribute = fieldInfo?.GetCustomAttribute<LegendSettingsAttribute>();
 
             plotModel.Legends.Add(new Legend(){
-                LegendTitle = "Legend",
+                LegendTitle = "Легенда",
                 LegendPlacement = attribute.Placement,
                 LegendPosition = attribute.Position,
             });
             plotModel.IsLegendVisible = true;            
 
-            // Create a PDF document
-            using (var pdfDocument = new PdfDocument(new PdfWriter(pdfInfo.FileName)))
+            using (var pdfDocument = new PdfDocument(new PdfWriter(pdfDiagram.FilePath)))
             {
                 var document = new Document(pdfDocument);
-                document.SetFont(font);
+                document.SetFont(font)
+                        .SetFontSize(18);
 
-                Paragraph title = new Paragraph(pdfInfo.DocumentTitle)
-                            .SetFont(font)
-                            .SetFontSize(18)
+                Paragraph title = new Paragraph(pdfDiagram.DocumentTitle)                            
                             .SetBold()
                             .SetTextAlignment(iText.Layout.Properties.TextAlignment.CENTER);
                 ;
                 document.Add(title);
 
-                // Create an image of the chart using OxyPlot
                 var chartImage = new MemoryStream();
                 var exporter = new PngExporter { Width = 600, Height = 450 };
                 exporter.Export(plotModel, chartImage);
 
-                // Insert the image into the PDF
                 var image = new iText.Layout.Element.Image(ImageDataFactory.Create(chartImage.ToArray()));
                 document.Add(image);
 
-                // Close the PDF document
                 document.Close();            
             }
         }
     }    
-
-    public class PdfDiagramFileInfo
-    {
-        public string? FileName { get; set; }
-        public string? DocumentTitle { get; set; }
-    }
-
-    public class DiagramData
-    {
-        public string? DiagramName { get; set; }
-        public DiagramLegendPosition LegendPosition { get; set; }
-        public Dictionary<string, List<(double, double)>>? Series { get; set; }
-    }
 }

@@ -1,4 +1,4 @@
-﻿using CustomComponent;
+﻿using CustomComponentLibrary;
 using PdfSharp.Drawing;
 using PdfSharp.Drawing.Layout;
 using PdfSharp.Pdf;
@@ -8,6 +8,9 @@ using System.Windows.Forms;
 using MigraDoc.DocumentObjectModel.Tables;
 using System.Runtime.CompilerServices;
 using MigraDoc.DocumentObjectModel;
+using WinFormsLibrary.Helpers.PdfWithText;
+using WinFormsLibrary.Helpers.PdfWithTable;
+using WinFormsLibrary.Helpers.PdfWithDiagram;
 
 namespace TestApplication
 {
@@ -20,7 +23,6 @@ namespace TestApplication
 
         private void buttonSaveFirst_Click(object sender, EventArgs e)
         {
-            // Получаем введенный заголовок и текст абзацев
             string documentTitle = textBoxHeader.Text;
             string[] paragraphs = textBoxParagraphs.Lines;
 
@@ -30,15 +32,13 @@ namespace TestApplication
                 return;
             }
 
-            // Определите путь к сохранению PDF-файла
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.Filter = "PDF Files|*.pdf";
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
                 string filePath = saveFileDialog.FileName;
 
-                // Создаем объект PdfDocumentData
-                PdfDocumentData pdfData = new PdfDocumentData
+                PdfWithTextData pdfData = new PdfWithTextData
                 {
                     FilePath = filePath,
                     DocumentTitle = documentTitle,
@@ -59,62 +59,53 @@ namespace TestApplication
 
         private void buttonSaveSecond_Click(object sender, EventArgs e)
         {
-            PdfTableData documentInfo = new PdfTableData();
-
-            List<HeaderInfo> headerInfos = new()
+            PdfWithTableData<TestData> tableData = new();
+            List<PdfWithTableHeader> tableHeader = new()
             {
-                new (){ColumnName="ID", ColumnWidth=50},
-                new (){ColumnName="University", ColumnWidth=100},
-                new (){
+                new PdfWithTableHeader()
+                {
+                    ColumnName="Id", 
+                    ColumnWidth=50
+                },
+                new PdfWithTableHeader()
+                {
+                    ColumnName="University", 
+                    ColumnWidth=100
+                },
+                new PdfWithTableHeader()
+                {
                     ColumnName="PersonalData",
-                    ColumnWidth=300,
+                    ColumnWidth=350,
                     MergeStart=2,
-                    MergeEnd=4,
+                    MergeEnd=3,
                     SubColumns = new()
                     {
-                        new (){ ColumnName="Name", ColumnWidth=100, IsSubColumn = true},
-                        new (){ ColumnName="Surname", ColumnWidth=100,IsSubColumn = true},
-                        new (){ ColumnName="City", ColumnWidth=100, IsSubColumn = true}
+                        new (){ ColumnName="Name", ColumnWidth=175},
+                        new (){ ColumnName="City", ColumnWidth=175}
                     }
-                },
-            };
+                }
+            };            
 
-            TableData data = new();
-            data.Data =
-                new()
-                {
-                    new Dictionary<string, string>
-                    {
-                        { "ID", "1" },
-                        { "University", "УлГТУ" },
-                        { "Name", "Иван" },
-                        { "Surname", "Петров" },
-                        { "City", "Ульяновск" },
-                    },
-                    new Dictionary<string, string>
-                    {
-                        { "ID", "2" },
-                        { "University", "УлГУ" },
-                        { "Name", "Иван" },
-                        { "Surname", "Петров" },
-                        { "City", "Ульяновск" },
-                    },
-                                // Добавьте другие записи
-            };
+            tableData.TableHeader = tableHeader;
+            tableData.Props = new List<string> { "Id", "University", "Name", "City" };
+            tableData.TableData = new()
+            {
+                new TestData(1, "УлГТУ", "Николай", "Ульяновск"),
+                new TestData(2, "УлГУ", "Иван", "Ульяновск"),
+            };            
 
-            // Определите путь к сохранению PDF-файла
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.Filter = "PDF Files|*.pdf";
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
                 string filePath = saveFileDialog.FileName;
 
-                documentInfo.DocumentTitle = textBoxHeader.Text;
-                documentInfo.FileName = filePath;
+                tableData.DocumentTitle = textBoxHeader.Text;
+                tableData.FilePath = filePath;
 
                 try
                 {
-                    componentWithTable.GeneratePdf(documentInfo, headerInfos, data);
+                    componentWithTable.GeneratePdf(tableData);
                     MessageBox.Show("PDF-документ успешно сохранен.", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 catch (Exception ex)
@@ -126,44 +117,48 @@ namespace TestApplication
 
         private void buttonDiagram_Click(object sender, EventArgs e)
         {
-            PdfDiagramFileInfo documentInfo = new PdfDiagramFileInfo();
-            DiagramData diagramData = new DiagramData();
+            PdfWithDiagramData diagramData = new();
+
+            diagramData.DocumentTitle = textBoxHeader.Text;
             diagramData.DiagramName = textBoxHeader.Text;
             diagramData.LegendPosition = DiagramLegendPosition.BottomCenterOutside;
-            diagramData.Series = new Dictionary<string, List<(double, double)>>()
-            {
-                {"Ряд 1", new List<(double, double)>()
+            diagramData.Series = new(){
+                new()
+                {
+                    Name = "Ряд 1",
+                    Data = new List<(double, double)>()
                     {
                         (1, 1),
                         (5, 10),
                         (10, 7),
                         (15, 12),
                         (20, 35),
-                    } 
+                    }
                 },
-                {"Ряд 2", new List<(double, double)>()
+                new()
+                {
+                    Name = "Ряд 2",
+                    Data = new List<(double, double)>()
                     {
                         (1, 7),
                         (5, 12),
                         (10, 35),
                         (15, 1),
-                        (20, 10),                            
+                        (20, 10),
                     }
-                }                
-            };
+                }
+            };                                    
 
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.Filter = "PDF Files|*.pdf";
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
                 string filePath = saveFileDialog.FileName;
-
-                documentInfo.DocumentTitle = textBoxHeader.Text;
-                documentInfo.FileName = filePath;
+                diagramData.FilePath = filePath;                
 
                 try
                 {
-                    componentWithLinearDiagram.GeneratePdfDocumentWithChart(documentInfo, diagramData);
+                    componentWithLinearDiagram.GeneratePdfDocumentWithChart(diagramData);
                     MessageBox.Show("PDF-документ успешно сохранен.", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 catch (Exception ex)

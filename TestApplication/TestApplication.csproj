@@ -13,7 +13,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CustomComponent\CustomComponent.csproj" />
+    <ProjectReference Include="..\CustomComponent\CustomComponentLibrary.csproj" />
+    <ProjectReference Include="..\WinFormsLibrary\WinFormsLibrary.csproj" />
   </ItemGroup>
 
   <ItemGroup>

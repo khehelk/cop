@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CustomComponent
+namespace WinFormsLibrary.Helpers.PdfWithDiagram
 {
     public class LegendSettingsAttribute : Attribute
     {

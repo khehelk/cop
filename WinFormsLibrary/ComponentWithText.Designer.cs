@@ -1,6 +1,6 @@
-﻿namespace CustomComponent
+﻿namespace WinFormsLibrary
 {
-    partial class ComponentWithTable
+    partial class ComponentWithText
     {
         /// <summary>
         /// Required designer variable.

@@ -1,4 +1,4 @@
-﻿namespace CustomComponent
+﻿namespace WinFormsLibrary
 {
     partial class ComponentWithLinearDiagram
     {

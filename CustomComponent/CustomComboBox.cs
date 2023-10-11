@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace CustomComponent
+namespace CustomComponentLibrary
 {
     public partial class CustomComboBox : UserControl
     {

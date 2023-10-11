@@ -35,10 +35,10 @@
             textBoxParagraphs = new TextBox();
             buttonSaveFirst = new Button();
             buttonSaveSecond = new Button();
-            componentWithBigText = new CustomComponent.ComponentWithBigText();
-            componentWithTable = new CustomComponent.ComponentWithTable(components);
+            componentWithBigText = new WinFormsLibrary.ComponentWithText();
+            componentWithTable = new WinFormsLibrary.ComponentWithTable(components);
             buttonDiagram = new Button();
-            componentWithLinearDiagram = new CustomComponent.ComponentWithLinearDiagram(components);
+            componentWithLinearDiagram = new WinFormsLibrary.ComponentWithLinearDiagram(components);
             SuspendLayout();
             // 
             // textBoxHeader
@@ -129,9 +129,9 @@
         private TextBox textBoxParagraphs;
         private Button buttonSaveFirst;
         private Button buttonSaveSecond;
-        private CustomComponent.ComponentWithBigText componentWithBigText;
-        private CustomComponent.ComponentWithTable componentWithTable;
+        private WinFormsLibrary.ComponentWithText componentWithBigText;
+        private WinFormsLibrary.ComponentWithTable componentWithTable;
         private Button buttonDiagram;
-        private CustomComponent.ComponentWithLinearDiagram componentWithLinearDiagram;
+        private WinFormsLibrary.ComponentWithLinearDiagram componentWithLinearDiagram;
     }
 }

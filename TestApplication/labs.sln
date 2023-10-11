@@ -5,7 +5,9 @@ VisualStudioVersion = 17.7.34024.191
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestApplication", "TestApplication.csproj", "{7A534EA9-E005-4D42-B4D3-D9405EC7A7DF}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CustomComponent", "..\CustomComponent\CustomComponent.csproj", "{4673FE55-596A-4128-B81B-9726EB4BFCA5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CustomComponentLibrary", "..\CustomComponent\CustomComponentLibrary.csproj", "{4673FE55-596A-4128-B81B-9726EB4BFCA5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinFormsLibrary", "..\WinFormsLibrary\WinFormsLibrary.csproj", "{211C0EC2-E6E1-4965-9D27-7BE33CBEBDAF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{4673FE55-596A-4128-B81B-9726EB4BFCA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4673FE55-596A-4128-B81B-9726EB4BFCA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4673FE55-596A-4128-B81B-9726EB4BFCA5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{211C0EC2-E6E1-4965-9D27-7BE33CBEBDAF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{211C0EC2-E6E1-4965-9D27-7BE33CBEBDAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{211C0EC2-E6E1-4965-9D27-7BE33CBEBDAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{211C0EC2-E6E1-4965-9D27-7BE33CBEBDAF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
