@@ -1,0 +1,25 @@
+﻿using DataModels.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Contracts.BindingModels
+{
+    public class ProviderBindingModel:IProvider
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Type { get; set; }
+        public string Furniture { get; set; }
+        public DateTime? SupplyDate { get; set; }
+
+        public ProviderBindingModel() { }
+
+        public ProviderBindingModel(IProvider provider)
+        {
+            Id = provider.Id;
+        }
+    }
+}
