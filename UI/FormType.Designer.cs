@@ -28,12 +28,38 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "FormType";
+            dataGridView = new DataGridView();
+            ((System.ComponentModel.ISupportInitialize)dataGridView).BeginInit();
+            SuspendLayout();
+            // 
+            // dataGridView
+            // 
+            dataGridView.BackgroundColor = SystemColors.ButtonHighlight;
+            dataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView.Dock = DockStyle.Fill;
+            dataGridView.Location = new Point(0, 0);
+            dataGridView.Name = "dataGridView";
+            dataGridView.RowTemplate.Height = 25;
+            dataGridView.Size = new Size(355, 306);
+            dataGridView.TabIndex = 0;
+            dataGridView.CellValueChanged += DataGridView_CellValueChanged;
+            dataGridView.KeyDown += DataGridView_KeyDown;
+            // 
+            // FormType
+            // 
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(355, 306);
+            Controls.Add(dataGridView);
+            Name = "FormType";
+            Text = "Добавление/Редактирование типов";
+            Load += FormType_Load;
+            ((System.ComponentModel.ISupportInitialize)dataGridView).EndInit();
+            ResumeLayout(false);
         }
 
         #endregion
+
+        private DataGridView dataGridView;
     }
 }

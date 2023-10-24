@@ -28,33 +28,108 @@
         /// </summary>
         private void InitializeComponent()
         {
-            controlDataTableCell1 = new ControlsLibraryNet60.Data.ControlDataTableCell();
+            components = new System.ComponentModel.Container();
+            contextMenuStrip = new ContextMenuStrip(components);
+            addProviderItem = new ToolStripMenuItem();
+            editProviderItem = new ToolStripMenuItem();
+            removeProviderItem = new ToolStripMenuItem();
+            getSimpleDocumentItem = new ToolStripMenuItem();
+            getTableDocumentItem = new ToolStripMenuItem();
+            getDiagramDocumentItem = new ToolStripMenuItem();
+            controlDataTreeCell = new ControlsLibraryNet60.Data.ControlDataTreeCell();
+            componentWithText = new WinFormsLibrary.ComponentWithText();
+            componentDocumentWithTableMultiHeaderExcel = new ComponentsLibraryNet60.DocumentWithTable.ComponentDocumentWithTableMultiHeaderExcel(components);
+            componentDocumentWithChartPieWord = new ComponentsLibraryNet60.DocumentWithChart.ComponentDocumentWithChartPieWord(components);
+            componentDocumentWithChartBarWord1 = new ComponentsLibraryNet60.DocumentWithChart.ComponentDocumentWithChartBarWord(components);
+            contextMenuStrip.SuspendLayout();
             SuspendLayout();
             // 
-            // controlDataTableCell1
+            // contextMenuStrip
             // 
-            controlDataTableCell1.Dock = DockStyle.Fill;
-            controlDataTableCell1.Location = new Point(0, 0);
-            controlDataTableCell1.Margin = new Padding(4, 3, 4, 3);
-            controlDataTableCell1.Name = "controlDataTableCell1";
-            controlDataTableCell1.SelectedRowIndex = -1;
-            controlDataTableCell1.Size = new Size(800, 450);
-            controlDataTableCell1.TabIndex = 0;
+            contextMenuStrip.Items.AddRange(new ToolStripItem[] { addProviderItem, editProviderItem, removeProviderItem, getSimpleDocumentItem, getTableDocumentItem, getDiagramDocumentItem });
+            contextMenuStrip.Name = "contextMenuStrip1";
+            contextMenuStrip.Size = new Size(265, 136);
+            contextMenuStrip.Text = "Меню";
+            // 
+            // addProviderItem
+            // 
+            addProviderItem.DisplayStyle = ToolStripItemDisplayStyle.Text;
+            addProviderItem.Name = "addProviderItem";
+            addProviderItem.Size = new Size(264, 22);
+            addProviderItem.Text = "Добавить";
+            addProviderItem.Click += AddProviderItem_Click;
+            // 
+            // editProviderItem
+            // 
+            editProviderItem.Name = "editProviderItem";
+            editProviderItem.Size = new Size(264, 22);
+            editProviderItem.Text = "Редактировать";
+            editProviderItem.Click += EditProviderItem_Click;
+            // 
+            // removeProviderItem
+            // 
+            removeProviderItem.Name = "removeProviderItem";
+            removeProviderItem.Size = new Size(264, 22);
+            removeProviderItem.Text = "Удалить";
+            removeProviderItem.Click += RemoveProviderItem_Click;
+            // 
+            // getSimpleDocumentItem
+            // 
+            getSimpleDocumentItem.Name = "getSimpleDocumentItem";
+            getSimpleDocumentItem.Size = new Size(264, 22);
+            getSimpleDocumentItem.Text = "Получить простой документ";
+            getSimpleDocumentItem.Click += GetSimpleDocumentItem_Click;
+            // 
+            // getTableDocumentItem
+            // 
+            getTableDocumentItem.Name = "getTableDocumentItem";
+            getTableDocumentItem.Size = new Size(264, 22);
+            getTableDocumentItem.Text = "Получить документ с таблицей";
+            getTableDocumentItem.Click += GetTableDocumentItem_Click;
+            // 
+            // getDiagramDocumentItem
+            // 
+            getDiagramDocumentItem.Name = "getDiagramDocumentItem";
+            getDiagramDocumentItem.Size = new Size(264, 22);
+            getDiagramDocumentItem.Text = "Получить документ с диаграммой";
+            getDiagramDocumentItem.Click += GetDiagramDocumentItem_Click;
+            // 
+            // controlDataTreeCell
+            // 
+            controlDataTreeCell.ContextMenuStrip = contextMenuStrip;
+            controlDataTreeCell.Dock = DockStyle.Fill;
+            controlDataTreeCell.Location = new Point(0, 0);
+            controlDataTreeCell.Margin = new Padding(4, 3, 4, 3);
+            controlDataTreeCell.Name = "controlDataTreeCell";
+            controlDataTreeCell.Size = new Size(323, 450);
+            controlDataTreeCell.TabIndex = 1;
             // 
             // FormMain
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
-            Controls.Add(controlDataTableCell1);
+            ClientSize = new Size(323, 450);
+            Controls.Add(controlDataTreeCell);
+            KeyPreview = true;
             Name = "FormMain";
             Text = "Основная форма";
             Load += FormMain_Load;
+            contextMenuStrip.ResumeLayout(false);
             ResumeLayout(false);
         }
 
         #endregion
-
-        private ControlsLibraryNet60.Data.ControlDataTableCell controlDataTableCell1;
+        private ContextMenuStrip contextMenuStrip;
+        private ToolStripMenuItem addProviderItem;
+        private ToolStripMenuItem editProviderItem;
+        private ToolStripMenuItem removeProviderItem;
+        private ToolStripMenuItem getSimpleDocumentItem;
+        private ToolStripMenuItem getTableDocumentItem;
+        private ToolStripMenuItem getDiagramDocumentItem;
+        private ControlsLibraryNet60.Data.ControlDataTreeCell controlDataTreeCell;
+        private WinFormsLibrary.ComponentWithText componentWithText;
+        private ComponentsLibraryNet60.DocumentWithTable.ComponentDocumentWithTableMultiHeaderExcel componentDocumentWithTableMultiHeaderExcel;
+        private ComponentsLibraryNet60.DocumentWithChart.ComponentDocumentWithChartPieWord componentDocumentWithChartPieWord;
+        private ComponentsLibraryNet60.DocumentWithChart.ComponentDocumentWithChartBarWord componentDocumentWithChartBarWord1;
     }
 }

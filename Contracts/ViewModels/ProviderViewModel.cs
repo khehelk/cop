@@ -13,6 +13,7 @@ namespace Contracts.ViewModels
         public string Name { get; set; }
         public string Type { get; set; }
         public string Furniture { get; set; }
-        public DateTime? SupplyDate { get; set; }        
+        public DateTime? SupplyDate { get; set; }       
+        public string? SupplyDateTime { get; set; }
     }
 }

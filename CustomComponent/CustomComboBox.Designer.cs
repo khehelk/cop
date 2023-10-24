@@ -33,11 +33,11 @@
             // 
             // comboBox
             // 
-            comboBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            comboBox.Dock = DockStyle.Fill;
             comboBox.FormattingEnabled = true;
-            comboBox.Location = new Point(15, 13);
+            comboBox.Location = new Point(0, 0);
             comboBox.Name = "comboBox";
-            comboBox.Size = new Size(174, 23);
+            comboBox.Size = new Size(404, 23);
             comboBox.TabIndex = 0;
             comboBox.SelectedIndexChanged += ComboBox_SelectedValueChanged;
             // 
@@ -46,8 +46,9 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(comboBox);
+            Margin = new Padding(0);
             Name = "CustomComboBox";
-            Size = new Size(201, 50);
+            Size = new Size(404, 25);
             ResumeLayout(false);
         }
 

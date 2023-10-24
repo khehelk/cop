@@ -19,7 +19,7 @@ namespace DatabaseImplement.Models
         public string Type { get; set; }
         [Required]
         public string Furniture { get; set; }
-        public DateTime? SupplyDate { get; set; }
+        public DateTime? SupplyDate { get; set; } = DateTime.MinValue;
 
         public static Provider? Create(ProviderBindingModel model)
         {
