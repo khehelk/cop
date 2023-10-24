@@ -270,6 +270,7 @@ namespace UI
             EventArgs e
         )
         {
+            // TODO: Необходимо решить проблему с компонентом Эгова
             var providersList = _providerStorage
                 .GetFullList()
                 .Where(item => item.SupplyDate?.Year == DateTime.Now.Year)
