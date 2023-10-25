@@ -36,6 +36,7 @@
             getSimpleDocumentItem = new ToolStripMenuItem();
             getTableDocumentItem = new ToolStripMenuItem();
             getDiagramDocumentItem = new ToolStripMenuItem();
+            открытьСправочникToolStripMenuItem = new ToolStripMenuItem();
             controlDataTreeCell = new ControlsLibraryNet60.Data.ControlDataTreeCell();
             componentWithText = new WinFormsLibrary.ComponentWithText();
             componentDocumentWithTableMultiHeaderExcel = new ComponentsLibraryNet60.DocumentWithTable.ComponentDocumentWithTableMultiHeaderExcel(components);
@@ -46,9 +47,9 @@
             // 
             // contextMenuStrip
             // 
-            contextMenuStrip.Items.AddRange(new ToolStripItem[] { addProviderItem, editProviderItem, removeProviderItem, getSimpleDocumentItem, getTableDocumentItem, getDiagramDocumentItem });
+            contextMenuStrip.Items.AddRange(new ToolStripItem[] { addProviderItem, editProviderItem, removeProviderItem, getSimpleDocumentItem, getTableDocumentItem, getDiagramDocumentItem, открытьСправочникToolStripMenuItem });
             contextMenuStrip.Name = "contextMenuStrip1";
-            contextMenuStrip.Size = new Size(265, 136);
+            contextMenuStrip.Size = new Size(265, 180);
             contextMenuStrip.Text = "Меню";
             // 
             // addProviderItem
@@ -94,6 +95,13 @@
             getDiagramDocumentItem.Text = "Получить документ с диаграммой";
             getDiagramDocumentItem.Click += GetDiagramDocumentItem_Click;
             // 
+            // открытьСправочникToolStripMenuItem
+            // 
+            открытьСправочникToolStripMenuItem.Name = "открытьСправочникToolStripMenuItem";
+            открытьСправочникToolStripMenuItem.Size = new Size(264, 22);
+            открытьСправочникToolStripMenuItem.Text = "Открыть справочник";
+            открытьСправочникToolStripMenuItem.Click += OpenListToolStripMenuItem_Click;
+            // 
             // controlDataTreeCell
             // 
             controlDataTreeCell.ContextMenuStrip = contextMenuStrip;
@@ -131,5 +139,6 @@
         private ComponentsLibraryNet60.DocumentWithTable.ComponentDocumentWithTableMultiHeaderExcel componentDocumentWithTableMultiHeaderExcel;
         private ComponentsLibraryNet60.DocumentWithChart.ComponentDocumentWithChartPieWord componentDocumentWithChartPieWord;
         private ComponentsLibraryNet60.DocumentWithChart.ComponentDocumentWithChartBarWord componentDocumentWithChartBarWord1;
+        private ToolStripMenuItem открытьСправочникToolStripMenuItem;
     }
 }

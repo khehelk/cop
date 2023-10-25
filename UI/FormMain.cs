@@ -270,7 +270,6 @@ namespace UI
             EventArgs e
         )
         {
-            // TODO: Необходимо решить проблему с компонентом Эгова
             var providersList = _providerStorage
                 .GetFullList()
                 .Where(item => item.SupplyDate?.Year == DateTime.Now.Year)
@@ -282,11 +281,11 @@ namespace UI
                     Count = (double)group.Count(),
                 });
 
-            var resultData = new Dictionary<string, List<(int, double)>>();
+            var resultData = new List<(int, double)>();
 
             foreach (var provider in providersList)
             {
-                resultData[provider.Type] = new() { (DateTime.Now.Year, provider.Count) };
+                resultData.Add((DateTime.Now.Year, provider.Count));
             }
 
             ComponentDocumentWithChartConfig config = new()
@@ -296,7 +295,7 @@ namespace UI
                 Header = "Круговая диаграмма",
                 Data = new()
                 {
-                    {"Типы организаций", new(){(2023, 25.0), (2023, 12.0), (2023, 37.0)} },
+                    { "Тип организации", resultData },
                 },
             };
 
@@ -353,7 +352,20 @@ namespace UI
                     case Keys.C:
                         GetDiagramDocumentItem_Click(sender, e);
                         break;
+                    case Keys.M:
+                        OpenListToolStripMenuItem_Click(sender, e);
+                        break;
                 }
+            }
+        }
+
+        private void OpenListToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var service = Program.ServiceProvider?.GetService(typeof(FormType));
+            if (service is FormType form)
+            {
+                form.ShowDialog();
+                LoadData();
             }
         }
     }
