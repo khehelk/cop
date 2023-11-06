@@ -21,5 +21,10 @@ namespace Contracts.BindingModels
         {
             Id = provider.Id;
         }
+
+        public ProviderBindingModel(int id)
+        {
+            Id = id;
+        }
     }
 }
