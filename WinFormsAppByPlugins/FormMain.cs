@@ -30,7 +30,7 @@ namespace WinFormsAppByPlugins
         private List<IPluginsConvention> GetPlugins()
         {
             string currentDir = Environment.CurrentDirectory;
-            string pluginsDir = Directory.GetParent(currentDir).Parent.Parent.Parent.FullName + "\\Plugins";
+            string pluginsDir = Directory.GetParent(currentDir)?.Parent?.Parent?.Parent?.FullName + "\\Plugins";
             string[] dllFiles = Directory.GetFiles(
                 pluginsDir,
                 "*.dll",
